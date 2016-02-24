@@ -17,5 +17,7 @@ namespace ProyectoTiempos.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<ProyectoTiempos.Models.Usuario> Usuarios { get; set; }
     }
 }

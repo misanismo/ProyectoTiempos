@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,7 +8,8 @@ namespace ProyectoTiempos.Models
 {
     public class Apuesta
     {
-        public int Id { get; set; }
+        [Key]
+        public int IdApuesta { get; set; }
 
         public int IdUsuario { get; set; }
         public virtual Usuario Usuario { get; set; }
@@ -20,8 +22,6 @@ namespace ProyectoTiempos.Models
 
         public double MontoApuesta { get; set; }
 
-        monto
-
-
+     
     }
 }
