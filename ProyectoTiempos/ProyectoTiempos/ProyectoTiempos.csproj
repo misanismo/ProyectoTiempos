@@ -196,8 +196,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApuestasController.cs" />
+    <Compile Include="Controllers\CasasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NumeroesController.cs" />
+    <Compile Include="Controllers\NumeroGanadorsController.cs" />
+    <Compile Include="Controllers\PremiosController.cs" />
+    <Compile Include="Controllers\SorteosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -209,6 +215,22 @@
     <Compile Include="Migrations\201602242230528_CreateUsuariosTable.cs" />
     <Compile Include="Migrations\201602242230528_CreateUsuariosTable.Designer.cs">
       <DependentUpon>201602242230528_CreateUsuariosTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602242246263_CreateNumeroTable.cs" />
+    <Compile Include="Migrations\201602242246263_CreateNumeroTable.Designer.cs">
+      <DependentUpon>201602242246263_CreateNumeroTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602242247454_CreateSorteoTable.cs" />
+    <Compile Include="Migrations\201602242247454_CreateSorteoTable.Designer.cs">
+      <DependentUpon>201602242247454_CreateSorteoTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602242249420_CreateApuestaTable.cs" />
+    <Compile Include="Migrations\201602242249420_CreateApuestaTable.Designer.cs">
+      <DependentUpon>201602242249420_CreateApuestaTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602242255104_CreateRestoTablas.cs" />
+    <Compile Include="Migrations\201602242255104_CreateRestoTablas.Designer.cs">
+      <DependentUpon>201602242255104_CreateRestoTablas.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -290,6 +312,36 @@
     <Content Include="Views\Usuarios\Details.cshtml" />
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Apuestas\Create.cshtml" />
+    <Content Include="Views\Apuestas\Delete.cshtml" />
+    <Content Include="Views\Apuestas\Details.cshtml" />
+    <Content Include="Views\Apuestas\Edit.cshtml" />
+    <Content Include="Views\Apuestas\Index.cshtml" />
+    <Content Include="Views\Casas\Create.cshtml" />
+    <Content Include="Views\Casas\Delete.cshtml" />
+    <Content Include="Views\Casas\Details.cshtml" />
+    <Content Include="Views\Casas\Edit.cshtml" />
+    <Content Include="Views\Casas\Index.cshtml" />
+    <Content Include="Views\Numeroes\Create.cshtml" />
+    <Content Include="Views\Numeroes\Delete.cshtml" />
+    <Content Include="Views\Numeroes\Details.cshtml" />
+    <Content Include="Views\Numeroes\Edit.cshtml" />
+    <Content Include="Views\Numeroes\Index.cshtml" />
+    <Content Include="Views\NumeroGanadors\Create.cshtml" />
+    <Content Include="Views\NumeroGanadors\Delete.cshtml" />
+    <Content Include="Views\NumeroGanadors\Details.cshtml" />
+    <Content Include="Views\NumeroGanadors\Edit.cshtml" />
+    <Content Include="Views\NumeroGanadors\Index.cshtml" />
+    <Content Include="Views\Premios\Create.cshtml" />
+    <Content Include="Views\Premios\Delete.cshtml" />
+    <Content Include="Views\Premios\Details.cshtml" />
+    <Content Include="Views\Premios\Edit.cshtml" />
+    <Content Include="Views\Premios\Index.cshtml" />
+    <Content Include="Views\Sorteos\Create.cshtml" />
+    <Content Include="Views\Sorteos\Delete.cshtml" />
+    <Content Include="Views\Sorteos\Details.cshtml" />
+    <Content Include="Views\Sorteos\Edit.cshtml" />
+    <Content Include="Views\Sorteos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -308,6 +360,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602242230528_CreateUsuariosTable.resx">
       <DependentUpon>201602242230528_CreateUsuariosTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602242246263_CreateNumeroTable.resx">
+      <DependentUpon>201602242246263_CreateNumeroTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602242247454_CreateSorteoTable.resx">
+      <DependentUpon>201602242247454_CreateSorteoTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602242249420_CreateApuestaTable.resx">
+      <DependentUpon>201602242249420_CreateApuestaTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602242255104_CreateRestoTablas.resx">
+      <DependentUpon>201602242255104_CreateRestoTablas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

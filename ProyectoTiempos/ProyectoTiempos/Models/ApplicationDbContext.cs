@@ -18,6 +18,18 @@ namespace ProyectoTiempos.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<ProyectoTiempos.Models.Usuario> Usuarios { get; set; }
+        public System.Data.Entity.DbSet<Usuario> Usuarios { get; set; }
+
+        public System.Data.Entity.DbSet<Numero> Numeros { get; set; }
+
+        public System.Data.Entity.DbSet<Sorteo> Sorteos { get; set; }
+
+        public System.Data.Entity.DbSet<Apuesta> Apuestas { get; set; }
+
+        public System.Data.Entity.DbSet<Casa> Casas { get; set; }
+
+        public System.Data.Entity.DbSet<NumeroGanador> NumerosGanadores { get; set; }
+
+        public System.Data.Entity.DbSet<Premio> Premios { get; set; }
     }
 }
