@@ -1,10 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+@using ProyectoTiempos.Clases
+@using ProyectoTiempos.Models
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <title>@ViewBag.Title - Tiempos</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -18,14 +21,51 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nombre de aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Tiempos", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
+                @{
+                    var session=new CustomPrincipal("");
+                    try
+                    {
+                        session = (CustomPrincipal)HttpContext.Current.User;
+                    }
+                    catch (Exception ex)
+                    {
+
+                        
+                    }
+
+                }
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    @*<li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+            <li>@Html.ActionLink("Acerca de", "About", "Home")</li>*@
+                    @if (Request.IsAuthenticated)
+                    {
+
+                        if (session.TipoUsuario == TipoUser.Admin)
+                        {
+                            
+                        
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mantenimientos <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("Index", "Apuestas")">Apuestas</a></li>
+                        <li><a href="@Url.Action("Index", "Usuarios")">Usuarios</a></li>
+                        <li><a href="@Url.Action("Index", "Sorteos")">Sorteos</a></li>
+                        <li><a href="@Url.Action("Index", "Casas")">Casa</a></li>
+
+                    </ul>
+                            </li>
+                            }
+
+                            <li><a href="@Url.Action("Create", "GenerarApuestas")">Apuestas</a></li>
+
+
+                       
+                    }
                 </ul>
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

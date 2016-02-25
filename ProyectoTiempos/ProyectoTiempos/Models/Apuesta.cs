@@ -17,6 +17,8 @@ namespace ProyectoTiempos.Models
         public int IdNumero { get; set; }
         public virtual Numero Numero { get; set; }
 
+        
+
         public int IdSorteo { get; set; }
         public virtual Sorteo Sorteo { get; set; }
 

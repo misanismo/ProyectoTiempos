@@ -195,9 +195,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Clases\Common.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApuestasController.cs" />
     <Compile Include="Controllers\CasasController.cs" />
+    <Compile Include="Controllers\GenerarApuestasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NumeroesController.cs" />
@@ -232,10 +234,15 @@
     <Compile Include="Migrations\201602242255104_CreateRestoTablas.Designer.cs">
       <DependentUpon>201602242255104_CreateRestoTablas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602251709287_UserChangeTable.cs" />
+    <Compile Include="Migrations\201602251709287_UserChangeTable.Designer.cs">
+      <DependentUpon>201602251709287_UserChangeTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Apuesta.cs" />
+    <Compile Include="Models\ApuestasViewModel.cs" />
     <Compile Include="Models\Casa.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -246,6 +253,7 @@
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Views\BaseViewPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -342,9 +350,15 @@
     <Content Include="Views\Sorteos\Details.cshtml" />
     <Content Include="Views\Sorteos\Edit.cshtml" />
     <Content Include="Views\Sorteos\Index.cshtml" />
+    <Content Include="Views\GenerarApuestas\Create.cshtml" />
+    <Content Include="Views\GenerarApuestas\Delete.cshtml" />
+    <Content Include="Views\GenerarApuestas\Details.cshtml" />
+    <Content Include="Views\GenerarApuestas\Edit.cshtml" />
+    <Content Include="Views\GenerarApuestas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -372,6 +386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602242255104_CreateRestoTablas.resx">
       <DependentUpon>201602242255104_CreateRestoTablas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602251709287_UserChangeTable.resx">
+      <DependentUpon>201602251709287_UserChangeTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
