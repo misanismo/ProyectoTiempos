@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ProyectoTiempos.Models.Apuesta>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Numero.Numeros)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sorteo.NumeroSorteo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MontoApuesta)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Numero.Numeros)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sorteo.NumeroSorteo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MontoApuesta)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdApuesta }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdApuesta }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdApuesta })
+        </td>
+    </tr>
+}
+
+</table>

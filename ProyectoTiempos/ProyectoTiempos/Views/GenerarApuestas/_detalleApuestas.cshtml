@@ -1,0 +1,67 @@
+﻿@using System.Linq
+@model IList<ProyectoTiempos.Models.DetalleApuestaViewModel>
+
+<h4>
+    Detalles de la Apuesta
+</h4>
+<table id="TableListDetalesEntity" class="table table-striped table-bordered table-condensed"
+       style="font-size: small">
+    <thead>
+    <tr>
+        <th>Numero</th>
+        <th>Monto Apuesta</th>
+        <th></th>
+    </tr>
+    </thead>
+
+    @if (Model != null && Model.Any())
+    {
+        <script type="text/javascript">
+            ViewCommonVariable.clearDetallesList();
+        </script>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <script type="text/javascript">
+                    @{<text>ViewCommonVariable.addfacturasVariasDetalle(@item.DetalleId,@item.IdNumero, @item.Numeros,@item.Monto, @item.Borrar, @item.ErrorCode, '@item.ErrorDescription', @item.Index);</text>}
+                </script>
+                if (item.Borrar == 1)
+                {
+                    continue;
+                }
+                var rowId = "tableRowId" + item.DetalleId;
+                <tr id='@rowId'>
+                    <td style="text-align: center">
+                        @item.Numeros
+                    </td>
+                    <td style="text-align: center">
+                        @item.Monto
+                    </td>
+                    
+                    <td style="text-align: center">
+                        <a class="btn btn-mini btn-danger btnDeleteDetalle" data-idDetalleOrden='@item.IdNumero' title="Borrar la Orden">
+                            <i class="icon-remove"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td style="border: 0"></td>
+                <td style="border: 0"></td>
+                <td style="border: 0"></td>
+                <td style="border: 0"></td>
+                <td style="border: 0"></td>
+                <td style="text-align: right">
+                    <b>Total Monto:</b>
+                </td>
+                @*<td style="text-align: right">
+                    <b>Model.Where(d => d.Borrar == 0).Sum(d => d.MontoApuesta)</b>
+                </td>*@
+            </tr>
+          
+
+            
+           
+        </tbody>
+                    }
+</table>

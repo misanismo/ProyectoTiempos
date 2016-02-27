@@ -1,0 +1,42 @@
+﻿@model ProyectoTiempos.Models.Casa
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Casa</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MontoInicial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MontoInicial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MontoAcumulado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MontoAcumulado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdCasa }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
