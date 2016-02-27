@@ -150,17 +150,11 @@ namespace ProyectoTiempos.Controllers
             {
                 IEnumerable<DetalleApuestaViewModel> detalleList = new JavaScriptSerializer().Deserialize<IList<DetalleApuestaViewModel>>(jsonDetallesList[0]);
                 IList<DetalleApuestaViewModel> newList = new List<DetalleApuestaViewModel>();
-                int index = 0;
                 foreach (var item in detalleList)
                 {
                     if (item.Borrar == 1)
-                        item.Index = -1;
-                    else
-                    {
-                        item.Index = index;
-
-                        index++;
-                    }
+                        item.IdNumero = -1;
+                   
                     newList.Add(item);
                 }
                 return PartialView("_detalleApuestas", newList);
@@ -172,37 +166,24 @@ namespace ProyectoTiempos.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddAndRenderListDetallesOrden(IList<string> jsonDetallesList, int? detalleId, int? idNumero, int? numero, int? montoApuesta)
+        public ActionResult AddAndRenderListDetallesOrden(IList<string> jsonDetallesList,  int? idNumero, int? numero, int? montoApuesta)
         {
-
             try
             {
                 IEnumerable<DetalleApuestaViewModel> detalleList = new JavaScriptSerializer().Deserialize<IList<DetalleApuestaViewModel>>(jsonDetallesList[0]);
 
-
-
-
-
                 if (detalleList.Any(item => item.IdNumero == idNumero))
                 {
-                    return Json(new { Error = -1, Message = "Ya existe una entrada para el artículo " + numero + " por favor edite correctamente el detalle." });
+                    return Json(new { Error = -1, Message = "Ya existe una entrada para el numero " + numero + " por favor ingrese correctamente la apuesta." });
                 }
 
-
-
-
-
                 if (montoApuesta == null || montoApuesta <= 0)
-                    return Json(new { Error = -1, Message = "Por Favor indique monto  correctamente." });
-
-
+                    return Json(new { Error = -1, Message = "Por Favor indique monto correctamente." });
 
                 DetalleApuestaViewModel detalle = new DetalleApuestaViewModel();
-                detalle.DetalleId = (int)detalleId;
                 detalle.IdNumero = (int)idNumero;
                 detalle.Numeros = (int)numero;
                 detalle.Monto = (int)montoApuesta;
-
                 detalle.Borrar = 0;
                 detalle.ErrorDescription = "";
                 detalle.ErrorCode = 0;
@@ -211,21 +192,17 @@ namespace ProyectoTiempos.Controllers
                 int index = 0;
                 foreach (var item in detalleList)
                 {
-                    item.Index = index;
                     newList.Add(item);
                     index++;
                 }
 
-                detalle.Index = index;
                 newList.Add(detalle);
-
-
 
                 return PartialView("_detalleApuestas", newList);
             }
             catch (Exception)
             {
-                return Json(new { Error = -1, Message = "Error al Agregar/Modificar la Orden" });
+                return Json(new { Error = -1, Message = "Error al Agregar la Apuesta" });
             }
         }
 

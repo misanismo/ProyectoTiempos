@@ -3,8 +3,6 @@
   
     var apuestasModel;
 
-    var createDetalleCompraUrl;
-
     var renderDetalleApuestaListUrl = "/GenerarApuestas/RenderListDetallesOrden";
 
     var addAndRenderDetalleApuestaListUrl = "/GenerarApuestas/AddAndRenderListDetallesOrden";
@@ -24,25 +22,20 @@
         }
     };
 
-    var detalleApuestas = function (detalleId, numeroId, numero, montoApuesta, guardado, actualizar, borrar, errorCode, errorDesc, index) {
-        this.Index = index;
-        this.DetalleId = detalleId;
-        this.NumeroId = numeroId;
-        this.Numero = numero;
-        this.MontoApuesta = montoApuesta;
+    var detalleApuestas = function (numeroId, numero, montoApuesta, borrar, errorCode, errorDesc) {
+        this.IdNumero = numeroId;
+        this.Numeros = numero;
+        this.Monto = montoApuesta;
 
-        this.Guardado = guardado; //si ya esta guardado a a orden
-        this.Actualizar = actualizar; // si hay que actualizar algun dato
         this.Borrar = borrar; // si hay que actualizar algun dato
-        this.DisponibilidadArticulo = 0;
         this.ErrorDescription = errorDesc;
         this.ErrorCode = errorCode;
     };
 
-    this.addApuestaDetalle = function (detalleId, numeroId, numero, montoApuesta, guardado, actualizar, borrar, errorCode, errorDesc, index) {
+    this.addApuestaDetalle = function (numeroId, numero, montoApuesta,  borrar, errorCode, errorDesc) {
         try {
            // numeroApuesta = $("<div>").html(numeroApuesta).text();
-            var apuestaDetalleItem = new detalleApuestas(detalleId, numeroId, numero, montoApuesta, guardado, actualizar, borrar, errorCode, errorDesc, index);
+            var apuestaDetalleItem = new detalleApuestas(numeroId, numero, montoApuesta, borrar, errorCode, errorDesc);
             apuestasModel.Detalles.push(apuestaDetalleItem);
             return apuestaDetalleItem;
         } catch (exc) { return false; }
@@ -51,7 +44,7 @@
     this.addApuestaDetalleP = function (numeroId, numero, montoApuesta) {
         try {
             // numeroApuesta = $("<div>").html(numeroApuesta).text();
-            var apuestaDetalleItem = new detalleApuestas(detalleId, numeroId, numero, montoApuesta);
+            var apuestaDetalleItem = new detalleApuestas(numeroId, numero, montoApuesta);
             apuestasModel.Detalles.push(apuestaDetalleItem);
             return apuestaDetalleItem;
         } catch (exc) { return false; }
@@ -62,9 +55,8 @@
             //facturasVariasModel.Detalles.splice(index, 1);
 
             $.each(apuestasModel.Detalles, function (i, value) {
-                if (index == value.Index) {
+                if (index == value.IdNumero) {
                     value.Borrar = 1;
-                    value.Actualizar = 1;
                 }
             });
 
@@ -102,36 +94,15 @@
     };
 
 
-    this.setUrlViewsApuestasFunctions = function (createUrlp,  renderDetalleApuestaListUrlp, addAndRenderDetalleApuestaListUrlp) {
-        createUrl = createUrlp;
-        renderDetalleApuestaListUrl = renderDetalleApuestaListUrlp;
-        addAndRenderDetalleApuestaListUrl = addAndRenderDetalleApuestaListUrlp;
-    };
-
-
     //---- Errors Alerts
     function clearErrors() { $('#msgErrorAnyModal').html(''); $('#IndexAlerts').html(''); $('#detalleInventarioAlerts').html(''); }
 
     function writeError(control, msg, type) {
-        var errMsg = '<div class="alert alert-block alert-' + type + '"><a class="close" data-dismiss="alert" href="#">×</a><h4 class="alert-heading">' + msg + '</h4></div>';
+        var errMsg = '<div class="alert alert-danger" role="alert"><a class="close" data-dismiss="alert" href="#">×</a><h4 class="alert-heading">' + msg + '</h4></div>';
         $('#' + control).html(errMsg);
     }
 
-    //------------Articulos y Detalles
-    function getRequest(url) {
-        $.ajax({
-            url: url,
-            context: document.body,
-            success: function (data) {
-                $('.modal-body p.body').html(data);
-                $(this).addClass("done");
-                $('#anyModalForm').modal('show');
-            }, error: function (err) { writeError('msgErrorAnyModal', err, 'error'); }
-        });
-    }
-
-   
-
+  
     function renderDetallesApuestas() {
         clearErrors();
         $.ajax({
@@ -150,16 +121,16 @@
         });
     }
 
-    this.addAndRenderDetallesApuestaList = function (detalleId, idNumero, numero, montoApuesta) {
+    this.addAndRenderDetallesApuestaList = function (idNumero, numero, montoApuesta) {
         clearErrors();
         $.ajax({
             url: addAndRenderDetalleApuestaListUrl,
             type: "POST",
             cache: false,
-            data: { jsonDetallesList: JSON.stringify(apuestasModel.Detalles), DetalleId: detalleId, IdNumero: idNumero, Numero: numero, MontoApuesta: montoApuesta},
+            data: { jsonDetallesList: JSON.stringify(apuestasModel.Detalles), IdNumero: idNumero, Numero: numero, MontoApuesta: montoApuesta},
             success: function (data) {
                 if (data.Error == "-1") {
-                    writeAlert('detalleInventarioAlerts', data.Message, 'error');
+                    writeError('detalleInventarioAlerts', data.Message, 'danger');
                 }
                 else {
                     $("#anyListDetailsEntity").html(data);
@@ -184,27 +155,12 @@
         return true;
     }
 
-    //$('#guardarApuestasBtn').click( function () {
-    //    clearErrors();
-    //    var detalleId = $("#ProductoId_Hidden").val();
-    //    var idNumero = $("#IdNumero_Hidden").val();
-    //    var numero = $("#Numero_Hidden").val();
-    //    var montoApuesta = $("#MontoApuesta_Hidden").val();
-    //    var isUpdateVal = $("#isUpdateHidden").val();
 
-
-    //    var index = $("#selectedIndexArticuloHidden").val();
-    //    if (isUpdateVal == 0) { addAndRenderDetallesApuestaList(detalleId, idNumero, numero, montoApuesta); }
-    //    return false;
-    //});
-
-
-    //$('.btnDeleteDetalle').click(function () {
-    //    clearErrors();
-    //    var index = $(this).attr("data-idDetalleOrden");
-    //    removeApuestaDetalle(index);
-    //    return false;
-    //});
+   this.removerDetalle= function  (idNumero) {
+        clearErrors();
+        removeApuestaDetalle(idNumero);
+        return false;
+    };
 
 
 
@@ -286,28 +242,7 @@
     //    });
     //});
 
-
-    //$('a.btnModalCancelPaseInventarioMainConfirmation').live('click', function () {
-    //    clearErrors();
-    //    $('#PaseInventarioConfirmationMain_modal').modal('hide');
-    //    return false;
-    //});
-
-
     
-
-    this.logfacturaDetalle = function (id, index, isNota, isProducto, tipo, cantidad, nombre, descripcion, impuestos, monto) {
-        this.clearDetallesList();
-        try {
-            var ordenDetalleItem = new detalleInventario(id, isProducto, isNota, tipo, nombre, cantidad, monto, impuestos, descripcion, 0, 1, 0, 0, "", index);
-            facturasVariasModel.Detalles.push(ordenDetalleItem);
-            return ordenDetalleItem;
-        } catch (exc) { }
-    };
-
-
-
-
 }
 
 ViewCommonVariable = new ViewCommonProcess();

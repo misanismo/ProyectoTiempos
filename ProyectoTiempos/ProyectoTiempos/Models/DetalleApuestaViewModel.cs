@@ -7,14 +7,8 @@ namespace ProyectoTiempos.Models
 {
     public class DetalleApuestaViewModel
     {
-
-        public int DetalleId { get; set; }
-
-        public int Index { get; set; }
-        
-        
-        public string Nombre { get; set; }
-
+        public int IdNumero { get; set; }
+        public int Numeros { get; set; }
         public double Monto { get; set; }
         
         public string ErrorDescription { get; set; }
@@ -22,10 +16,6 @@ namespace ProyectoTiempos.Models
         public int ErrorCode { get; set; }
 
         public int Borrar { get; set; }
-
-        public int IdNumero { get; set; }
-
-        public int Numeros { get; set; }
 
     }
 }

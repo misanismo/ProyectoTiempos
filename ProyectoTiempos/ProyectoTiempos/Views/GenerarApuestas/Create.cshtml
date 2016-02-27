@@ -25,8 +25,15 @@
         $("#IdNumero_HiddenModal").val(numeroId);
         $("#Contrato_hidden").val(numero);
         $("#PrevistaCod_text").val(montoApuesta);
-        ViewCommonVariable.addAndRenderDetallesApuestaList(0,numeroId, numero, montoApuesta);
+        $("#5").prop("disabled", true );
+
+        ViewCommonVariable.addAndRenderDetallesApuestaList(numeroId, numero, montoApuesta);
+        
         $('#squarespaceModal').modal('hide');
+    }
+
+    function deleteDetalleApuesta(idNumero) {
+        ViewCommonVariable.removerDetalle(idNumero);
     }
 
 </script>
@@ -52,7 +59,7 @@
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon" id="sizing-addon2">₡</span>
-                        <input id="montoApuesta" type="text" class="form-control" placeholder="Monto Apuesta" aria-describedby="sizing-addon2">
+                        <input id="montoApuesta" type="text" class="form-control clearDetalle" placeholder="Monto Apuesta" aria-describedby="sizing-addon2">
                     </div>
                 </div>
                 <div class="well row ">
@@ -71,15 +78,14 @@
 
 
 <h2>Apuestas</h2>
-
+ <hr/>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal col-lg-6">
-        <h4>Apuesta</h4>
-        <hr />
+        
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
@@ -94,12 +100,16 @@
 
 
 
-        <div class="container col-lg-6">
-            <script type="text/javascript">
-                ViewCommonVariable.initializeApuestas();
-                    @{<text>ViewCommonVariable.setApuestasV(@Model.IdNumero,@Model.Numero );</text>}
-            </script>
 
+        <script type="text/javascript">
+            ViewCommonVariable.initializeApuestas();
+            @{<text>ViewCommonVariable.setApuestasV(@Model.IdNumero,@Model.Numero );</text>}
+        </script>
+
+        <div id="detalleInventarioAlerts" style="text-align: center"></div>
+
+
+        <div class="container col-lg-6">
             <div id="anyListDetailsEntity">
                 @{Html.RenderPartial("_detalleApuestas", Model.Detalles);}
             </div>
@@ -115,68 +125,71 @@
 
 
     <div class="container col-lg-6">
+
+       
+
         <h3>Numeros</h3>
 
         <table class="table">
             <thead>
-                <tr>
-                    <th colspan="10">Elige los numeros a apostar</th>
-                </tr>
+            <tr>
+                <th colspan="10">Elige los numeros a apostar</th>
+            </tr>
             </thead>
             <tbody>
-                @for (int i = 0; i < Model.Numeros.Count; i++)
+            @for (int i = 0; i < Model.Numeros.Count; i++)
 
+            {
+
+                if (i < 100)
                 {
+                    <tr>
+                        <td>
+                            <div class="btn btn-default" id="@Model.Numeros[i].IdNumero" onclick="showModal(@Model.Numeros[i].IdNumero, @Model.Numeros[i].Numeros)">@Model.Numeros[i].Numeros</div>
+                        </td>
 
-                    if (i < 100)
-                    {
-                        <tr>
-                            <td>
-                                <div class="btn btn-default" id="@Model.Numeros[i].IdNumero" onclick="showModal(@Model.Numeros[i].IdNumero,@Model.Numeros[i].Numeros )">@Model.Numeros[i].Numeros</div>
-                            </td>
+                        <td>
+                            <div class="btn btn-default" id="@Model.Numeros[i + 1].IdNumero" onclick="showModal(@Model.Numeros[i + 1].IdNumero, @Model.Numeros[i + 1].Numeros)">@Model.Numeros[i + 1].Numeros</div>
+                        </td>
 
-                            <td>
-                                <div class="btn btn-default" id="@Model.Numeros[i+1].IdNumero" onclick="showModal(@Model.Numeros[i+1].IdNumero,@Model.Numeros[i+1].Numeros )">@Model.Numeros[i+1].Numeros</div>
-                            </td>
+                        <td>
+                            <div class="btn btn-default" id="@Model.Numeros[i + 2].IdNumero" onclick="showModal(@Model.Numeros[i + 2].IdNumero, @Model.Numeros[i + 2].Numeros)">@Model.Numeros[i + 2].Numeros</div>
+                        </td>
 
-                            <td>
-                                <div class="btn btn-default" id="@Model.Numeros[i+2].IdNumero" onclick="showModal(@Model.Numeros[i+2].IdNumero,@Model.Numeros[i+2].Numeros )">@Model.Numeros[i + 2].Numeros</div>
-                            </td>
+                        <td>
+                            <div class="btn btn-default" id="@Model.Numeros[i + 3].IdNumero" onclick="showModal(@Model.Numeros[i + 3].IdNumero, @Model.Numeros[i + 3].Numeros)">@Model.Numeros[i + 3].Numeros</div>
+                        </td>
 
-                            <td>
-                                <div class="btn btn-default" id="@Model.Numeros[i+3].IdNumero" onclick="showModal(@Model.Numeros[i+3].IdNumero,@Model.Numeros[i + 3].Numeros )">@Model.Numeros[i + 3].Numeros</div>
-                            </td>
+                        <td>
+                            <div class="btn btn-default" id="@Model.Numeros[i + 4].IdNumero" onclick="showModal(@Model.Numeros[i + 4].IdNumero, @Model.Numeros[i + 4].Numeros)">@Model.Numeros[i + 4].Numeros</div>
+                        </td>
 
-                            <td>
-                                <div class="btn btn-default" id="@Model.Numeros[i+4].IdNumero" onclick="showModal(@Model.Numeros[i+4].IdNumero,@Model.Numeros[i+4].Numeros )">@Model.Numeros[i + 4].Numeros</div>
-                            </td>
+                        <td>
+                            <div class="btn btn-default" id="@Model.Numeros[i + 5].IdNumero" onclick="showModal(@Model.Numeros[i + 5].IdNumero, @Model.Numeros[i + 5].Numeros)">@Model.Numeros[i + 5].Numeros</div>
+                        </td>
 
-                            <td>
-                                <div class="btn btn-default" id="@Model.Numeros[i+5].IdNumero" onclick="showModal(@Model.Numeros[i+5].IdNumero,@Model.Numeros[i+5].Numeros )">@Model.Numeros[i + 5].Numeros</div>
-                            </td>
+                        <td>
+                            <div class="btn btn-default" id="@Model.Numeros[i + 6].IdNumero" onclick="showModal(@Model.Numeros[i + 6].IdNumero, @Model.Numeros[i + 6].Numeros)">@Model.Numeros[i + 6].Numeros</div>
+                        </td>
 
-                            <td>
-                                <div class="btn btn-default" id="@Model.Numeros[i+6].IdNumero" onclick="showModal(@Model.Numeros[i+6].IdNumero,@Model.Numeros[i+6].Numeros )">@Model.Numeros[i + 6].Numeros</div>
-                            </td>
+                        <td>
+                            <div class="btn btn-default" id="@Model.Numeros[i + 7].IdNumero" onclick="showModal(@Model.Numeros[i + 7].IdNumero, @Model.Numeros[i + 7].Numeros)">@Model.Numeros[i + 7].Numeros</div>
+                        </td>
 
-                            <td>
-                                <div class="btn btn-default" id="@Model.Numeros[i+7].IdNumero" onclick="showModal(@Model.Numeros[i+7].IdNumero,@Model.Numeros[i+7].Numeros )">@Model.Numeros[i + 7].Numeros</div>
-                            </td>
+                        <td>
+                            <div class="btn btn-default" id="@Model.Numeros[i + 8].IdNumero" onclick="showModal(@Model.Numeros[i + 8].IdNumero, @Model.Numeros[i + 8].Numeros)">@Model.Numeros[i + 8].Numeros</div>
+                        </td>
 
-                            <td>
-                                <div class="btn btn-default" id="@Model.Numeros[i+8].IdNumero" onclick="showModal(@Model.Numeros[i+8].IdNumero,@Model.Numeros[i+8].Numeros )">@Model.Numeros[i + 8].Numeros</div>
-                            </td>
-
-                            <td>
-                                <div class="btn btn-default" id="@Model.Numeros[i+9].IdNumero" onclick="showModal(@Model.Numeros[i+9].IdNumero,@Model.Numeros[i+9].Numeros )">@Model.Numeros[i + 9].Numeros</div>
-                            </td>
+                        <td>
+                            <div class="btn btn-default" id="@Model.Numeros[i + 9].IdNumero" onclick="showModal(@Model.Numeros[i + 9].IdNumero, @Model.Numeros[i + 9].Numeros)">@Model.Numeros[i + 9].Numeros</div>
+                        </td>
 
 
-                        </tr>
+                    </tr>
 
-                    }
-                    i = i + 9;
                 }
+                i = i + 9;
+            }
 
 
             </tbody>
