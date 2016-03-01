@@ -59,7 +59,7 @@ namespace ProyectoTiempos.Controllers
 
             double totalApuesta = detalleList.Sum(a => a.Monto);
 
-
+            // LOGICA AQUI <-------------
             
             //if (ModelState.IsValid)
             //{
