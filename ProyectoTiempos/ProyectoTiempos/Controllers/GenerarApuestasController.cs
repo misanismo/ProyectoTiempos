@@ -53,20 +53,25 @@ namespace ProyectoTiempos.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdApuesta,IdUsuario,IdNumero,IdSorteo,MontoApuesta")] Apuesta apuesta)
+        public ActionResult Create(IList<string> jsonDetallesList, int? idUsuario, int? idSorteo)
         {
-            if (ModelState.IsValid)
-            {
-                db.Apuestas.Add(apuesta);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            IEnumerable<DetalleApuestaViewModel> detalleList = new JavaScriptSerializer().Deserialize<IList<DetalleApuestaViewModel>>(jsonDetallesList[0]);
 
-            ViewBag.IdNumero = new SelectList(db.Numeros, "IdNumero", "IdNumero", apuesta.IdNumero);
-            ViewBag.IdSorteo = new SelectList(db.Sorteos, "IdSorteo", "Nombre", apuesta.IdSorteo);
-            ViewBag.IdUsuario = new SelectList(db.Usuarios, "IdUsuario", "Nombre", apuesta.IdUsuario);
-            return View(apuesta);
+            double totalApuesta = detalleList.Sum(a => a.Monto);
+
+
+            
+            //if (ModelState.IsValid)
+            //{
+            //    db.Apuestas.Add(apuesta);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+
+            //ViewBag.IdNumero = new SelectList(db.Numeros, "IdNumero", "IdNumero", apuesta.IdNumero);
+            //ViewBag.IdSorteo = new SelectList(db.Sorteos, "IdSorteo", "Nombre", apuesta.IdSorteo);
+            //ViewBag.IdUsuario = new SelectList(db.Usuarios, "IdUsuario", "Nombre", apuesta.IdUsuario);
+            return View();
         }
 
         // GET: GenerarApuestas/Edit/5

@@ -1,10 +1,7 @@
 ﻿function ViewCommonProcess() {
-    var createUrl;
-  
+    var createUrl = "/GenerarApuestas/Create";
     var apuestasModel;
-
     var renderDetalleApuestaListUrl = "/GenerarApuestas/RenderListDetallesOrden";
-
     var addAndRenderDetalleApuestaListUrl = "/GenerarApuestas/AddAndRenderListDetallesOrden";
 
     var apuestasVarias = function (usuarioId, usuarioNombre, arrayApuestas) {
@@ -137,7 +134,7 @@
                     clearDetallesFields();
                     disableDetallesFields();
                 }
-            }, error: function () { writeAlert('detalleInventarioAlerts', 'Error al agregar detalle a la orden.', 'error'); }
+            }, error: function () { writeAlert('alertsDetalles', 'Error al agregar detalle a la orden.', 'error'); }
         });
     }
 
@@ -163,15 +160,6 @@
     };
 
 
-
-    //this.updateOrdenesList = function () {
-    //    updateSolicitudesListLocal();
-    //};
-
-
-   
-
-
     function cerrarForm() {
         clearErrors();
         $("#anyPanelBody").html("");
@@ -179,68 +167,43 @@
     };
 
 
-    //$('a.btnCreateMainForm').click( function () {
-    //    clearErrors();
-    //    $("#anyPanelBody").html("");
-    //    if (!isEmpty(createUrl)) {
-    //        getRequestNoModal(createUrl);
-    //    }
-    //    return false;
-    //});
 
+    this.guardarTodoApuesta= function (idUsuario, idSorteo) {
+        clearErrors();
+        var contador = 0;
+        var detalle = apuestasModel.Detalles.length;
+        for (var i = 0; i < apuestasModel.Detalles.length; i++) {
+            if (apuestasModel.Detalles[i].Borrar == 1) {
+                {
+                    contador++;
+                }
+            }
+        }
+        if (contador == detalle) {
+            writeError('alertsDetalles', 'No ha seleccionado numeros para apostar.', 'error');
+            return;
+        }
 
-    
+        if (apuestasModel.Detalles < 1) {
+            writeError('alertsDetalles', 'No ha seleccionado numeros para apostar.', 'error');
+            return;
+        }
+        $.ajax({
+            url: createUrl,
+            type: "POST",
+            cache: false,
+            data: { jsonDetallesList: JSON.stringify(apuestasModel.Detalles), idUsuario: idUsuario, idSorteo: idSorteo },
+            success: function (data) {
+                if (Number(data) != -1) {
+                    
 
-
-
-    //Enviar y recibir facturas
-
-    //$('#guardarFacturaVaria').click(function () {
-    //    clearErrors();
-    //    var contador = 0;
-    //    var detalle = facturasVariasModel.Detalles.length;
-    //    for (var i = 0; i < facturasVariasModel.Detalles.length; i++) {
-    //        if (facturasVariasModel.Detalles[i].Borrar == 1) {
-    //            {
-    //                contador++;
-    //            }
-    //        }
-    //    }
-    //    if (contador == detalle) {
-    //        writeAlert('IndexAlerts', 'La factura no tiene ningún detalle asociado.', 'error');
-    //        return;
-    //    }
-
-    //    if (facturasVariasModel.Detalles < 1) {
-    //        writeAlert('IndexAlerts', 'La factura no tiene ningún detalle asociado.', 'error');
-    //        return;
-    //    }
-    //    $('body').addClass("loading");
-    //    $.ajax({
-    //        url: createUrl,
-    //        type: "POST",
-    //        cache: false,
-    //        data: { jsonDetallesList: JSON.stringify(facturasVariasModel.Detalles), abonadoId: $("#AbonadoId_Hidden").val(), abonadoNom: $("#AbonadoName_text").val() },
-    //        success: function (data) {
-    //            if (Number(data) != -1) {
-    //                if (data.TipoImpresora == "0") {
-    //                    imprimirFacturaVariasImpPunto(data);
-    //                    updateSolicitudesListLocal();
-    //                    writeAlert('IndexAlerts', 'Factura procesada.', 'success');
-    //                    cerrarForm();
-    //                } else if (data.TipoImpresora == "1") {
-    //                    imprimirFacturaVariasImpMatriz(data);
-    //                    writeAlert('IndexAlerts', 'Factura procesada.', 'success');
-    //                    cerrarForm();
-    //                }
-
-    //            } else {
-    //                writeAlert('IndexAlerts', 'Error al imprimir la factura.', 'error');
-    //            }
-    //        },
-    //        error: function () { writeAlert('IndexAlerts', 'Error al agregar notas a la factura.', 'error'); }
-    //    });
-    //});
+                } else {
+                    writeError('alertsDetalles', 'Error al guardar la apuesta.', 'error');
+                }
+            },
+            error: function () { writeError('alertsDetalles', 'Error .', 'error'); }
+        });
+    };
 
     
 }

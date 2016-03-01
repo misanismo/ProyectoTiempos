@@ -31,5 +31,7 @@ namespace ProyectoTiempos.Models
         public System.Data.Entity.DbSet<NumeroGanador> NumerosGanadores { get; set; }
 
         public System.Data.Entity.DbSet<Premio> Premios { get; set; }
+
+        public System.Data.Entity.DbSet<ProyectoTiempos.Models.DetalleApuesta> DetalleApuestas { get; set; }
     }
 }

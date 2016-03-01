@@ -29,6 +29,7 @@
                     try
                     {
                         session = (CustomPrincipal)HttpContext.Current.User;
+                        
                     }
                     catch (Exception ex)
                     {
@@ -70,13 +71,14 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-        </footer>
-    </div>
+<div class="container body-content">
+    <input type="hidden" id="idUsuario" value="@session.UsuarioId" />
+    @RenderBody()
+    <hr/>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+    </footer>
+</div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

@@ -199,6 +199,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApuestasController.cs" />
     <Compile Include="Controllers\CasasController.cs" />
+    <Compile Include="Controllers\DetalleApuestasController.cs" />
     <Compile Include="Controllers\GenerarApuestasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -238,12 +239,17 @@
     <Compile Include="Migrations\201602251709287_UserChangeTable.Designer.cs">
       <DependentUpon>201602251709287_UserChangeTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602292126513_CreateDetalleApuestaTable.cs" />
+    <Compile Include="Migrations\201602292126513_CreateDetalleApuestaTable.Designer.cs">
+      <DependentUpon>201602292126513_CreateDetalleApuestaTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Apuesta.cs" />
     <Compile Include="Models\ApuestasViewModel.cs" />
     <Compile Include="Models\Casa.cs" />
+    <Compile Include="Models\DetalleApuesta.cs" />
     <Compile Include="Models\DetalleApuestaViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -360,6 +366,11 @@
     <Content Include="Views\GenerarApuestas\Edit.cshtml" />
     <Content Include="Views\GenerarApuestas\Index.cshtml" />
     <Content Include="Views\GenerarApuestas\_detalleApuestas.cshtml" />
+    <Content Include="Views\DetalleApuestas\Create.cshtml" />
+    <Content Include="Views\DetalleApuestas\Delete.cshtml" />
+    <Content Include="Views\DetalleApuestas\Details.cshtml" />
+    <Content Include="Views\DetalleApuestas\Edit.cshtml" />
+    <Content Include="Views\DetalleApuestas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -393,6 +404,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602251709287_UserChangeTable.resx">
       <DependentUpon>201602251709287_UserChangeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602292126513_CreateDetalleApuestaTable.resx">
+      <DependentUpon>201602292126513_CreateDetalleApuestaTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
