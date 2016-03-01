@@ -14,6 +14,8 @@ namespace ProyectoTiempos.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
+
         // GET: Apuestas
         public ActionResult Index()
         {
