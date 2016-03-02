@@ -127,6 +127,8 @@ function ViewCommonProcess() {
     }
 
   
+    // funcion para borrar la opcion elegida y actualizar la tabla
+
     function renderDetallesApuestas() {
         clearErrors();
         $.ajax({
@@ -144,6 +146,8 @@ function ViewCommonProcess() {
             }, error: function () { writeAlert('detalleInventarioAlerts', data.Message, 'error'); }
         });
     }
+
+    //Agrega los nuevos datos a la tabla y actualiza la misma..
 
     this.addAndRenderDetallesApuestaList = function (idNumero, numero, montoApuesta) {
         clearErrors();
@@ -165,27 +169,35 @@ function ViewCommonProcess() {
         });
     }
 
+    //Limpia los campos de la tabla
+
     function clearDetallesFields() {
         $(".clearDetalle").val('');
         return true;
     }
 
+
+    //activa
     function enableDetallesFields() {
         $(".detalleAddPanel").prop('disabled', false);
         return true;
     }
+
+    //desactiva
     function disableDetallesFields() {
         $(".detalleAddPanel").prop('disabled', true);
         return true;
     }
 
 
+    //Elimina
    this.removerDetalle= function  (idNumero) {
         clearErrors();
         removeApuestaDetalle(idNumero);
         return false;
     };
 
+    //Cierra el form
 
     function cerrarForm() {
         clearErrors();
@@ -193,7 +205,7 @@ function ViewCommonProcess() {
         return false;
     };
 
-
+    //guarda la apuesta a la tabla de apuestas mostrada en la pagina
 
     this.guardarTodoApuesta= function (idUsuario, idSorteo) {
         clearErrors();
@@ -215,6 +227,8 @@ function ViewCommonProcess() {
             writeError('alertsDetalles', 'No ha seleccionado numeros para apostar.', 'error');
             return;
         }
+
+        //Guardamos la apuesta a BD
         $.ajax({
             url: createUrl,
             type: "POST",

@@ -132,5 +132,14 @@ namespace ProyectoTiempos.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [HttpPost]
+        public ActionResult MostrarDetalles(int idApuesta)
+        {
+            DetalleApuestaViewModelModal modal = new DetalleApuestaViewModelModal();
+            modal.Detalles = db.DetalleApuestas.Where(a => a.IdApuesta == idApuesta).ToList();
+            modal.Numeros = db.Numeros.ToList();
+            return PartialView("_detalle", modal );
+        }
     }
 }

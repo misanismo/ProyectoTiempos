@@ -10,5 +10,7 @@ namespace ProyectoTiempos.Models
         public IList<Sorteo> Sorteos { get; set; }
 
         public IList<DetalleApuesta>  DetalleApuestas { get; set; }
+
+        public IList<Numero> Numeros { get; set; }
     }
 }

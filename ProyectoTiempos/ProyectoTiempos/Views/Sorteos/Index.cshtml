@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h3>Sorteos</h3>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear", "Create", new { controller = "Sorteos" }, new { @class = "btn btn-success" })
 </p>
 <table class="table">
     <tr>
@@ -61,9 +61,9 @@
             @Html.DisplayFor(modelItem => item.Estado)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdSorteo }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdSorteo }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdSorteo })
+            @Html.ActionLink("Editar", "Edit", new { id=item.IdSorteo }, new { @class = "btn btn-warning" }) 
+            @Html.ActionLink("Detalles", "Details", new { id=item.IdSorteo }, new { @class = "btn btn-info" }) 
+            @Html.ActionLink("Borrar", "Delete", new { id=item.IdSorteo }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }

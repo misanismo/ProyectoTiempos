@@ -6,24 +6,22 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ProyectoTiempos.Clases;
 using ProyectoTiempos.Models;
 
 namespace ProyectoTiempos.Controllers
 {
-    [AuthorizeUser(Roles = TipoUser.Admin)]
-    public class NumeroGanadorsController : Controller
+    public class NumerosGanadoresController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: NumeroGanadors
+        // GET: NumerosGanadores
         public ActionResult Index()
         {
             var numerosGanadores = db.NumerosGanadores.Include(n => n.Numero).Include(n => n.Sorteo);
             return View(numerosGanadores.ToList());
         }
 
-        // GET: NumeroGanadors/Details/5
+        // GET: NumerosGanadores/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,20 +36,21 @@ namespace ProyectoTiempos.Controllers
             return View(numeroGanador);
         }
 
-        // GET: NumeroGanadors/Create
+        // GET: NumerosGanadores/Create
         public ActionResult Create()
         {
-            ViewBag.IdNumero = new SelectList(db.Numeros, "IdNumero", "IdNumero");
+            ViewBag.IdNumero = new SelectList(db.Numeros, "IdNumero", "Numeros");
             ViewBag.IdSorteo = new SelectList(db.Sorteos, "IdSorteo", "Nombre");
+            ViewBag.IdPremio = new SelectList(db.Premios, "Id", "Nombre");
             return View();
         }
 
-        // POST: NumeroGanadors/Create
+        // POST: NumerosGanadores/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdNumeroGanador,IdSorteo,IdNumero")] NumeroGanador numeroGanador)
+        public ActionResult Create([Bind(Include = "IdNumeroGanador,IdSorteo,IdNumero,IdPremio")] NumeroGanador numeroGanador)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +64,7 @@ namespace ProyectoTiempos.Controllers
             return View(numeroGanador);
         }
 
-        // GET: NumeroGanadors/Edit/5
+        // GET: NumerosGanadores/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -82,12 +81,12 @@ namespace ProyectoTiempos.Controllers
             return View(numeroGanador);
         }
 
-        // POST: NumeroGanadors/Edit/5
+        // POST: NumerosGanadores/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdNumeroGanador,IdSorteo,IdNumero")] NumeroGanador numeroGanador)
+        public ActionResult Edit([Bind(Include = "IdNumeroGanador,IdSorteo,IdNumero,IdPremio")] NumeroGanador numeroGanador)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +99,7 @@ namespace ProyectoTiempos.Controllers
             return View(numeroGanador);
         }
 
-        // GET: NumeroGanadors/Delete/5
+        // GET: NumerosGanadores/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -115,7 +114,7 @@ namespace ProyectoTiempos.Controllers
             return View(numeroGanador);
         }
 
-        // POST: NumeroGanadors/Delete/5
+        // POST: NumerosGanadores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

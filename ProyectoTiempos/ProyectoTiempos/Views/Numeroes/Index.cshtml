@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<ProyectoTiempos.Models.Numero>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Numeros";
 }
 
-<h2>Index</h2>
+<h2>Lista de Numeros</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -23,9 +20,7 @@
             @Html.DisplayFor(modelItem => item.Numeros)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdNumero }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdNumero }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdNumero })
+           
         </td>
     </tr>
 }

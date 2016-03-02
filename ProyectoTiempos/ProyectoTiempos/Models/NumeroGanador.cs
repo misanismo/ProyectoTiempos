@@ -19,7 +19,7 @@ namespace ProyectoTiempos.Models
 
         public int IdPremio { get; set; }
 
-        public virtual  Premio Premio{get;set;}
+        public virtual Premio Premio { get; set; }
 
 
 

@@ -23,6 +23,7 @@ namespace ProyectoTiempos.Controllers
             VisualizarViewModel view = new VisualizarViewModel();
             view.DetalleApuestas = db.DetalleApuestas.ToList();
             view.Sorteos = db.Sorteos.ToList();
+            view.Numeros = db.Numeros.ToList();
             return View(view);
         }
 

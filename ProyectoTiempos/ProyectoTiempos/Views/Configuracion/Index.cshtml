@@ -1,0 +1,51 @@
+﻿@model ProyectoTiempos.Models.ConfiguracionViewModel
+
+@{
+    ViewBag.Title = "Configuración";
+}
+
+<h2>Configuración</h2>
+<hr/>
+<br/>
+<div class="form-group">
+    <label class = "control-label col-md-4">Monto Acumulado de la Casa</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.MontoAcumulado, new { htmlAttributes = new { @class = "form-control" , @readonly="readonly"} })
+        
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
+<hr />
+<div class="form-group">
+    <label class="control-label col-md-4">Monto Destinado al peor de los casos</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.MontoEnElPeorDeLosCasos, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+<hr />
+<div class="form-group">
+    <label class="control-label col-md-4">Ganancia Mínima Posible</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.GananciaMinima, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+<hr />
+<div class="form-group">
+    <label class="control-label col-md-4">Monto Maxíma Posible</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.GananciaMaxima, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+    </div>
+</div>

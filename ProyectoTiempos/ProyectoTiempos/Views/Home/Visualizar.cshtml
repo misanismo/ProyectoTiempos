@@ -22,27 +22,31 @@
 @foreach (var item in Model.Sorteos) {
     <tr>
         <td colspan="2" style="background-color: antiquewhite;">
-            @item.Nombre
+            <span>Sorteo: </span>@item.Nombre
         </td>
     </tr>
-    foreach (var numSorteo in Model.DetalleApuestas.Where(a => a.Apuesta.IdSorteo == item.IdSorteo))
+    foreach (var numSorteo in Model.Numeros)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => numSorteo.Numero.Numeros)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => numSorteo.Monto)
-            </td>
+        if (Model.DetalleApuestas.Where(a => a.IdNumeros == numSorteo.IdNumero && a.Apuesta.IdSorteo == item.IdSorteo).Count() > 0)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => numSorteo.Numeros)
+                </td>
+                <td>
+                    @Model.DetalleApuestas.Where(a => a.IdNumeros == numSorteo.IdNumero && a.Apuesta.IdSorteo == item.IdSorteo).Sum(a=>a.Monto)
+                </td>
 
-        </tr>
+            </tr>
+        }
+
     }
 
     <tr>
-        <td>
+        <td style="background-color: grey;">
             Total Acumulado
         </td>
-        <td>
+        <td style="background-color: grey;">
             @Model.DetalleApuestas.Where(a => a.Apuesta.IdSorteo == item.IdSorteo).Sum(a => a.Monto)
         </td>
 

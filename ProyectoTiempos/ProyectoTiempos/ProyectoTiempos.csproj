@@ -199,11 +199,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApuestasController.cs" />
     <Compile Include="Controllers\CasasController.cs" />
+    <Compile Include="Controllers\ConfiguracionController.cs" />
     <Compile Include="Controllers\GenerarApuestasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NumeroesController.cs" />
-    <Compile Include="Controllers\NumeroGanadorsController.cs" />
+    <Compile Include="Controllers\NumerosGanadoresController.cs" />
     <Compile Include="Controllers\PremiosController.cs" />
     <Compile Include="Controllers\SorteosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="Models\Apuesta.cs" />
     <Compile Include="Models\ApuestasViewModel.cs" />
     <Compile Include="Models\Casa.cs" />
+    <Compile Include="Models\ConfiguracionViewModel.cs" />
     <Compile Include="Models\DetalleApuesta.cs" />
     <Compile Include="Models\DetalleApuestaViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -274,6 +276,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\estilos.css" />
+    <Content Include="Content\tiempos.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -348,11 +351,6 @@
     <Content Include="Views\Numeroes\Details.cshtml" />
     <Content Include="Views\Numeroes\Edit.cshtml" />
     <Content Include="Views\Numeroes\Index.cshtml" />
-    <Content Include="Views\NumeroGanadors\Create.cshtml" />
-    <Content Include="Views\NumeroGanadors\Delete.cshtml" />
-    <Content Include="Views\NumeroGanadors\Details.cshtml" />
-    <Content Include="Views\NumeroGanadors\Edit.cshtml" />
-    <Content Include="Views\NumeroGanadors\Index.cshtml" />
     <Content Include="Views\Premios\Create.cshtml" />
     <Content Include="Views\Premios\Delete.cshtml" />
     <Content Include="Views\Premios\Details.cshtml" />
@@ -375,6 +373,14 @@
     <Content Include="Views\Apuestas\Edit.cshtml" />
     <Content Include="Views\Apuestas\Index.cshtml" />
     <Content Include="Views\Home\Visualizar.cshtml" />
+    <Content Include="Views\NumerosGanadores\Create.cshtml" />
+    <Content Include="Views\NumerosGanadores\Delete.cshtml" />
+    <Content Include="Views\NumerosGanadores\Details.cshtml" />
+    <Content Include="Views\NumerosGanadores\Edit.cshtml" />
+    <Content Include="Views\NumerosGanadores\Index.cshtml" />
+    <Content Include="Views\Configuracion\Index.cshtml" />
+    <Content Include="Views\Apuestas\_detalle.cshtml" />
+    <Content Include="Views\GenerarApuestas\_detalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

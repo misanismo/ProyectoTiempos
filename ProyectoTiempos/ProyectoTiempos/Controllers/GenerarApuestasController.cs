@@ -60,22 +60,13 @@ namespace ProyectoTiempos.Controllers
 
             double totalApuesta = detalleList.Sum(a => a.Monto);
 
-
-
-            // LOGICA AQUI <-------------
-
-            //if (ModelState.IsValid)
-            //{
-            //    db.Apuestas.Add(apuesta);
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-
-            //ViewBag.IdNumero = new SelectList(db.Numeros, "IdNumero", "IdNumero", apuesta.IdNumero);
-            //ViewBag.IdSorteo = new SelectList(db.Sorteos, "IdSorteo", "Nombre", apuesta.IdSorteo);
-            //ViewBag.IdUsuario = new SelectList(db.Usuarios, "IdUsuario", "Nombre", apuesta.IdUsuario);
             return View();
         }
+
+
+        // Metodo para generar la apuesta
+        // Obtiene el Json y convierte a lista
+
 
         [HttpPost]
         public ActionResult GenerarApuesta(IList<string> jsonDetallesList, int? idUsuario, int? idSorteo)
@@ -92,8 +83,13 @@ namespace ProyectoTiempos.Controllers
                 {
                     return Json(new { Error = -1, Message = "El sorteo ya esta Vencido, por favor seleccione otro sorteo" });
                 }
-                
 
+                // Detalle de la apuesta y la ordena de manera descendente
+
+                IList<DetalleApuesta> tablaAcumulada = new List<DetalleApuesta>();
+                tablaAcumulada = db.DetalleApuestas.Where(a => a.Apuesta.IdSorteo == idSorteo).OrderByDescending(a => a.Monto).ToList();
+
+               
                 double montoTabla = 0;
                 double montoApuesta = 0;
                 double total1 = 0, total2 = 0, total3 = 0;
@@ -102,12 +98,15 @@ namespace ProyectoTiempos.Controllers
                 double totalCompremetido = 0;
                 
                 double totalApuesta = detalleList.Sum(a => a.Monto);
-                double totalCasa = db.Casas.Where(a => a.IdCasa == 1).Sum(a => a.MontoAcumulado) + totalApuesta;
+                double totalCasa = db.Casas.Where(a => a.IdCasa == 1).Sum(a => a.MontoAcumulado) + totalApuesta + tablaAcumulada.Sum(a => a.Monto);
 
                 var apuestaList = db.Apuestas.OrderByDescending(a => a.IdApuesta).ToList();
 
-                IList<DetalleApuesta> tablaAcumulada = new List<DetalleApuesta>();
-                tablaAcumulada = db.DetalleApuestas.Where(a=>a.Apuesta.IdSorteo == idSorteo).OrderByDescending(a => a.Monto).ToList();
+
+               
+
+
+                //Metodo en el cual se realizan los debidos calculos con sus debidos lugares favorecidos..
 
                 foreach (var item in detalleList)
                 {
@@ -134,6 +133,9 @@ namespace ProyectoTiempos.Controllers
                         
                     }
                 }
+
+                //Total de los 3 primeros lugares que pueden compremeter a la casa
+
                 totalCompremetido = total1 + total2 + total3;
                 if (totalCasa > totalCompremetido || totalCasa == totalCompremetido)
                 {
@@ -143,6 +145,8 @@ namespace ProyectoTiempos.Controllers
                 {
                     comprometido = true;
                 }
+
+                // Si el monto de la casa no esta comprometido se guarda la apuesta en la BD... si no muestra error
 
                 if (!comprometido)
                 {
@@ -164,16 +168,15 @@ namespace ProyectoTiempos.Controllers
                         db.SaveChanges();
                     }
 
-                    var updateCasa = new Casa();
+                    var updateCasa = db.Casas.Find(1);
                     updateCasa.MontoAcumulado = totalCasa;
-                    updateCasa.IdCasa = 1;
-                    db.Entry(updateCasa).State = EntityState.Modified;
+                    db.Casas.SqlQuery("update Casa set MontoAcumulado = " + totalCasa);
 
 
                 }
                 else
                 {
-                    return Json(new { Error = -1, Message = "El monto de su apuesta exede el capital de la casa, por favor baje los montos" });
+                    return Json(new { Error = -1, Message = "El monto de su apuesta excede el capital de la casa, por favor baje los montos" });
                 }
                 IList<DetalleApuestaViewModel> newList = new List<DetalleApuestaViewModel>();
                 return PartialView("_detalleApuestas", newList);
@@ -326,6 +329,16 @@ namespace ProyectoTiempos.Controllers
             {
                 return Json(new { Error = -1, Message = "Error al Agregar la Apuesta" });
             }
+        }
+
+
+        [HttpPost]
+        public ActionResult MostrarDetalles(int idApuesta)
+        {
+            DetalleApuestaViewModelModal modal = new DetalleApuestaViewModelModal();
+            modal.Detalles = db.DetalleApuestas.Where(a => a.IdApuesta == idApuesta).ToList();
+            modal.Numeros = db.Numeros.ToList();
+            return PartialView("_detalle", modal);
         }
 
     }

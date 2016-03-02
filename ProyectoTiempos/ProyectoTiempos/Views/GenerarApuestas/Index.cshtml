@@ -1,13 +1,58 @@
 ﻿@model IEnumerable<ProyectoTiempos.Models.Apuesta>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Apuesta";
 }
 
-<h2>Index</h2>
+
+<script type="text/javascript">
+
+    function showModal(idApuesta) {
+
+
+        $.ajax({
+            url: "/GenerarApuestas/MostrarDetalles",
+            type: "POST",
+            cache: false,
+            data: { idApuesta: idApuesta },
+            success: function (data) {
+                if (data.Error == "-1") {
+
+                }
+                else {
+                    $("#anyListDetailsEntity").html(data);
+
+                }
+            }, error: function () { }
+        });
+        $("#squarespaceModal").modal("show");
+    }
+
+</script>
+
+
+<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title" id="lineModalLabel">Numeros Elegidos</h3>
+            </div>
+            <div class="modal-body">
+
+                <div class="row well " id="anyListDetailsEntity"></div>
+
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+
+<h3>Haz tu apuesta</h3>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Apostar!", "Create", new { controller = "GenerarApuestas" }, new { @class = "btn btn-success" })
 </p>
 <table class="table">
     <tr>
@@ -39,7 +84,7 @@
                 @Html.DisplayFor(modelItem => item.MontoApuesta)
             </td>
             <td>
-                <a class="btn btn-sucess"><span class="glyphicon glyphicon-tasks" aria-hidden="true" title="Muestra Detalle de la Apuesta"></span></a>
+                <a class="btn btn-sucess"  onclick="showModal(@item.IdApuesta)"><span class="glyphicon glyphicon-tasks" aria-hidden="true" title="Muestra Detalle de la Apuesta"></span></a>
             </td>
 
         </tr>
