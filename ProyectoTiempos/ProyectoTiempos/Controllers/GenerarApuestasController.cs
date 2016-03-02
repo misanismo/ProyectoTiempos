@@ -81,7 +81,17 @@ namespace ProyectoTiempos.Controllers
         {
             try
             {
-                IEnumerable<DetalleApuestaViewModel> detalleList = new JavaScriptSerializer().Deserialize<IList<DetalleApuestaViewModel>>(jsonDetallesList[0]);
+                IEnumerable<DetalleApuestaViewModel> listaapuestas = new JavaScriptSerializer().Deserialize<IList<DetalleApuestaViewModel>>(jsonDetallesList[0]);
+
+                var detalleList = listaapuestas.Where(a => a.Borrar == 0).OrderByDescending(a => a.Monto);
+
+                var sorteo= db.Sorteos.Find(idSorteo);
+
+                if (sorteo.FechaInicio <= DateTime.Now && DateTime.Now >= sorteo.FechaIFinal)
+                {
+                    return Json(new { Error = -1, Message = "El sorteo ya esta Vencido, por favor seleccione otro sorteo" });
+                }
+                
 
                 double montoTabla = 0;
                 double montoApuesta = 0;
@@ -98,7 +108,7 @@ namespace ProyectoTiempos.Controllers
                 IList<DetalleApuesta> tablaAcumulada = new List<DetalleApuesta>();
                 tablaAcumulada = db.DetalleApuestas.Where(a=>a.Apuesta.IdSorteo == idSorteo).OrderByDescending(a => a.Monto).ToList();
 
-                foreach (var item in detalleList.OrderByDescending(a => a.Monto))
+                foreach (var item in detalleList)
                 {
                     double montoTotalAp = 0;
                     montoApuesta = item.Monto;
@@ -136,8 +146,8 @@ namespace ProyectoTiempos.Controllers
                 if (!comprometido)
                 {
                     var apuesta = new Apuesta();
-                    apuesta.IdSorteo = (int)idSorteo;
-                    apuesta.IdUsuario = (int)idUsuario;
+                    apuesta.IdSorteo = (int) idSorteo;
+                    apuesta.IdUsuario = (int) idUsuario;
                     apuesta.MontoApuesta = totalApuesta;
                     db.Apuestas.Add(apuesta);
                     db.SaveChanges();
@@ -145,9 +155,9 @@ namespace ProyectoTiempos.Controllers
                     foreach (var item in detalleList)
                     {
                         var detalle = new DetalleApuesta();
-                        detalle.IdApuesta = apuestaList.FirstOrDefault().IdApuesta+1;
+                        detalle.IdApuesta = apuestaList.FirstOrDefault().IdApuesta + 1;
                         detalle.IdNumeros = item.IdNumero;
-                        detalle.Monto = (int)item.Monto;
+                        detalle.Monto = (int) item.Monto;
 
                         db.DetalleApuestas.Add(detalle);
                         db.SaveChanges();
@@ -158,7 +168,11 @@ namespace ProyectoTiempos.Controllers
                     updateCasa.IdCasa = 1;
                     db.Entry(updateCasa).State = EntityState.Modified;
 
-                    
+
+                }
+                else
+                {
+                    return Json(new { Error = -1, Message = "El monto de su apuesta exede el capital de la casa, por favor baje los montos" });
                 }
 
                 return PartialView("_detalleApuestas", null);

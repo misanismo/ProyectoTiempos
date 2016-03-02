@@ -49,24 +49,30 @@
 
                         if (session.TipoUsuario == TipoUser.Admin)
                         {
-                            
-                        
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mantenimientos <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="@Url.Action("Index", "Apuestas")">Apuestas</a></li>
-                        <li><a href="@Url.Action("Index", "Usuarios")">Usuarios</a></li>
-                        <li><a href="@Url.Action("Index", "Sorteos")">Sorteos</a></li>
-                        <li><a href="@Url.Action("Index", "Casas")">Casa</a></li>
 
-                    </ul>
+
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mantenimientos <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@Url.Action("Index", "Apuestas")">Apuestas</a></li>
+                                    <li><a href="@Url.Action("Index", "Usuarios")">Usuarios</a></li>
+                                    <li><a href="@Url.Action("Index", "Sorteos")">Sorteos</a></li>
+                                    <li><a href="@Url.Action("Index", "Casas")">Casa</a></li>
+
+                                </ul>
                             </li>
-                            }
 
-                            <li><a href="@Url.Action("Create", "GenerarApuestas")">Apuestas</a></li>
+                            <li><a href="@Url.Action("Create", "GenerarApuestas")">Configuración</a></li>
+                        }
+                        @*else
+                        {
+                            
+                        }*@
+                        <li><a href="@Url.Action("Create", "GenerarApuestas")">Apuestas</a></li>
 
 
-                       
+
+
                     }
                 </ul>
 

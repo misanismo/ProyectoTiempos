@@ -216,10 +216,9 @@ function ViewCommonProcess() {
             cache: false,
             data: { jsonDetallesList: JSON.stringify(apuestasModel.Detalles), idUsuario: idUsuario, idSorteo: idSorteo },
             success: function (data) {
-                if (Number(data) != -1) {
-                    
-
-                } else {
+                if (data.Error == "-1") {
+                    writeError('alertsDetalles', data.Message, 'danger');
+                 } else {
                     writeError('alertsDetalles', 'Error al guardar la apuesta.', 'error');
                 }
             },
