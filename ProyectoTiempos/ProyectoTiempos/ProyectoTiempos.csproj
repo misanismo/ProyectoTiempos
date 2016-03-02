@@ -337,11 +337,6 @@
     <Content Include="Views\Usuarios\Details.cshtml" />
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
-    <Content Include="Views\Apuestas\Create.cshtml" />
-    <Content Include="Views\Apuestas\Delete.cshtml" />
-    <Content Include="Views\Apuestas\Details.cshtml" />
-    <Content Include="Views\Apuestas\Edit.cshtml" />
-    <Content Include="Views\Apuestas\Index.cshtml" />
     <Content Include="Views\Casas\Create.cshtml" />
     <Content Include="Views\Casas\Delete.cshtml" />
     <Content Include="Views\Casas\Details.cshtml" />
@@ -373,6 +368,11 @@
     <Content Include="Views\Sorteos\Details.cshtml" />
     <Content Include="Views\Sorteos\Edit.cshtml" />
     <Content Include="Views\Sorteos\Index.cshtml" />
+    <Content Include="Views\Apuestas\Create.cshtml" />
+    <Content Include="Views\Apuestas\Delete.cshtml" />
+    <Content Include="Views\Apuestas\Details.cshtml" />
+    <Content Include="Views\Apuestas\Edit.cshtml" />
+    <Content Include="Views\Apuestas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

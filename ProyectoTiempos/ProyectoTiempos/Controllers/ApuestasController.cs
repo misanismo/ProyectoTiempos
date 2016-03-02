@@ -6,17 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ProyectoTiempos.Clases;
 using ProyectoTiempos.Models;
 
 namespace ProyectoTiempos.Controllers
 {
-    [AuthorizeUser(Roles = TipoUser.Admin)]
     public class ApuestasController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-
 
         // GET: Apuestas
         public ActionResult Index()
@@ -40,14 +36,9 @@ namespace ProyectoTiempos.Controllers
             return View(apuesta);
         }
 
-        /*
-            Obtiene la lista de las tablas Numeros, Sorteos y Usuarios para mostrarlo seguidamente
-            */
-
         // GET: Apuestas/Create
         public ActionResult Create()
         {
-            ViewBag.IdNumero = new SelectList(db.Numeros, "IdNumero", "Numeros");
             ViewBag.IdSorteo = new SelectList(db.Sorteos, "IdSorteo", "Nombre");
             ViewBag.IdUsuario = new SelectList(db.Usuarios, "IdUsuario", "Nombre");
             return View();
@@ -56,14 +47,9 @@ namespace ProyectoTiempos.Controllers
         // POST: Apuestas/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
-
-        /*
-            Crea la apuesta con los datos obtenidos anteriormente
-       */
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdApuesta,IdUsuario,IdNumero,IdSorteo,MontoApuesta")] Apuesta apuesta)
+        public ActionResult Create([Bind(Include = "IdApuesta,IdUsuario,IdSorteo,MontoApuesta")] Apuesta apuesta)
         {
             if (ModelState.IsValid)
             {
@@ -72,14 +58,10 @@ namespace ProyectoTiempos.Controllers
                 return RedirectToAction("Index");
             }
 
-            
             ViewBag.IdSorteo = new SelectList(db.Sorteos, "IdSorteo", "Nombre", apuesta.IdSorteo);
             ViewBag.IdUsuario = new SelectList(db.Usuarios, "IdUsuario", "Nombre", apuesta.IdUsuario);
             return View(apuesta);
         }
-
-        // Edicion de la apuesta.... Obtiene los datos de la misma..
-
 
         // GET: Apuestas/Edit/5
         public ActionResult Edit(int? id)
@@ -93,21 +75,17 @@ namespace ProyectoTiempos.Controllers
             {
                 return HttpNotFound();
             }
-            
             ViewBag.IdSorteo = new SelectList(db.Sorteos, "IdSorteo", "Nombre", apuesta.IdSorteo);
             ViewBag.IdUsuario = new SelectList(db.Usuarios, "IdUsuario", "Nombre", apuesta.IdUsuario);
             return View(apuesta);
         }
-
-        //Una vez obtenida se hace la edicion con los datos que se obtuvieron.
-
 
         // POST: Apuestas/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdApuesta,IdUsuario,IdNumero,IdSorteo,MontoApuesta")] Apuesta apuesta)
+        public ActionResult Edit([Bind(Include = "IdApuesta,IdUsuario,IdSorteo,MontoApuesta")] Apuesta apuesta)
         {
             if (ModelState.IsValid)
             {

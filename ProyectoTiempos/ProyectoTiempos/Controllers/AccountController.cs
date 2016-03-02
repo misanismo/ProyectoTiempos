@@ -79,7 +79,7 @@ namespace ProyectoTiempos.Controllers
             bool isPersistent = model.RememberMe;
 
             var user = db.Usuarios.Where(a => a.Correo == model.Email && a.Contraseña == model.Password);
-            if (user != null)
+            if (user.Count()>0)
             {
                 var serializeModel = new Common();
                 
