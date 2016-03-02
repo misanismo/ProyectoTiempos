@@ -47,13 +47,15 @@
             @Html.DisplayFor(modelItem => item.HoraInicio)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FechaInicio)
+            @*@Html.DisplayFor(modelItem => item.FechaInicio.ToShortDateString())*@
+            @item.FechaInicio.ToShortDateString()
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.HoraFinal)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FechaIFinal)
+            @*@Html.DisplayFor(modelItem => item.FechaIFinal.ToShortDateString())*@
+            @item.FechaIFinal.ToShortDateString()
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Estado)

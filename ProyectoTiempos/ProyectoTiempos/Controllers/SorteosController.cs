@@ -6,10 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ProyectoTiempos.Clases;
 using ProyectoTiempos.Models;
 
 namespace ProyectoTiempos.Controllers
 {
+    [AuthorizeUser(Roles = TipoUser.Admin)]
     public class SorteosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
