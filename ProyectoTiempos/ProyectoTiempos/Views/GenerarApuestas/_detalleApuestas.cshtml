@@ -3,6 +3,9 @@
 <h4>
     Numeros Apostados
 </h4>
+
+@*Tabla para insertar las apuestas detalladas*@
+
 <table id="TableListDetalesEntity" class="table table-striped table-bordered table-condensed"
        style="font-size: small">
     <thead>
@@ -19,44 +22,48 @@
             ViewCommonVariable.clearDetallesList();
         </script>
         <tbody>
-            @foreach (var item in Model)
+
+          @*Se recorre el foreach insertando los datos a la tabla*@
+
+        @foreach (var item in Model)
+        {
+            <script type="text/javascript">
+                @{<text>ViewCommonVariable.addApuestaDetalle(@item.IdNumero, @item.Numeros,@item.Monto, @item.Borrar, @item.ErrorCode, '@item.ErrorDescription');</text>}
+                
+            </script>
+            if (item.Borrar == 1)
             {
-                <script type="text/javascript">
-                    @{<text>ViewCommonVariable.addApuestaDetalle(@item.IdNumero, @item.Numeros,@item.Monto, @item.Borrar, @item.ErrorCode, '@item.ErrorDescription');</text>}
-                </script>
-                if (item.Borrar == 1)
-                {
-                    continue;
-                }
-                var rowId = "tableRowId" + item.IdNumero;
-                <tr id='@rowId'>
-                    <td style="text-align: center">
-                        @item.Numeros
-                    </td>
-                    <td style="text-align: center">
-                        @item.Monto
-                    </td>
-                    
-                    <td style="text-align: center">
-                        <a class="btn btn-xs btn-danger" onclick="deleteDetalleApuesta(@item.IdNumero)" title="Borrar numero Apuesta">
-                            <i  class="glyphicon glyphicon-remove"></i>
-                        </a>
-                    </td>
-                </tr>
+                continue;
             }
-            <tr>
-                <td style="border: 0"></td>
-                <td style="text-align: right">
-                    <b>Total Monto:</b>
+            var rowId = "tableRowId" + item.IdNumero;
+            <tr id='@rowId'>
+                <td style="text-align: center">
+                    @item.Numeros
                 </td>
-                <td style="text-align: right">
-                    <b>@Model.Where(d => d.Borrar == 0).Sum(d => d.Monto)</b>
+                <td style="text-align: center">
+                    @item.Monto
+                </td>
+
+                <td style="text-align: center">
+                    <a class="btn btn-xs btn-danger" onclick="deleteDetalleApuesta(@item.IdNumero)" title="Borrar numero Apuesta">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </a>
                 </td>
             </tr>
-          
+        }
+        <tr>
+            <td style="border: 0"></td>
+            <td style="text-align: right">
+                <b>Total Monto:</b>
+            </td>
+            <td style="text-align: right">
+                <b>@Model.Where(d => d.Borrar == 0).Sum(d => d.Monto)</b>
+            </td>
+        </tr>
 
-            
-           
+
+
+
         </tbody>
                     }
 </table>

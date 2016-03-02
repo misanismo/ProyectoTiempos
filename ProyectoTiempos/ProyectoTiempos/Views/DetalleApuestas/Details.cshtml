@@ -1,0 +1,42 @@
+﻿@model ProyectoTiempos.Models.DetalleApuesta
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DetalleApuesta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Apuesta.IdApuesta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apuesta.IdApuesta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdNumeros)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdNumeros)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Monto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Monto)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdDetalleApuesta }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

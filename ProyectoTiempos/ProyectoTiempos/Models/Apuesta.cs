@@ -14,15 +14,12 @@ namespace ProyectoTiempos.Models
         public int IdUsuario { get; set; }
         public virtual Usuario Usuario { get; set; }
 
-        public int IdNumero { get; set; }
-        public virtual Numero Numero { get; set; }
-
-        
-
         public int IdSorteo { get; set; }
         public virtual Sorteo Sorteo { get; set; }
 
         public double MontoApuesta { get; set; }
+
+        public ICollection<DetalleApuesta> DetalleApuestas { get; set; }
 
      
     }

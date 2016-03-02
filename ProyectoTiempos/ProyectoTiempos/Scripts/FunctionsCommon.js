@@ -1,14 +1,21 @@
-﻿function ViewCommonProcess() {
-    var createUrl = "/GenerarApuestas/Create";
+﻿/// <reference path="jquery.validate.unobtrusive.min.js" />
+function ViewCommonProcess() {
+    var createUrl = "/GenerarApuestas/GenerarApuesta";
     var apuestasModel;
     var renderDetalleApuestaListUrl = "/GenerarApuestas/RenderListDetallesOrden";
     var addAndRenderDetalleApuestaListUrl = "/GenerarApuestas/AddAndRenderListDetallesOrden";
+
+
+    //Crea las variables para la funcion InitializeApuestas
 
     var apuestasVarias = function (usuarioId, usuarioNombre, arrayApuestas) {
         this.UsuarioId = usuarioId;
         this.UsuarioNombre = usuarioNombre;
         this.Detalles = arrayApuestas;
     };
+
+
+    // con las variables anteriores ejecuto la funcion, la cual realiza la apuesta
 
     this.initializeApuestas = function () {
         try {
@@ -19,6 +26,9 @@
         }
     };
 
+
+    // creo las variables que se van a necesitar para mostrat el detalle de las apuestas
+
     var detalleApuestas = function (numeroId, numero, montoApuesta, borrar, errorCode, errorDesc) {
         this.IdNumero = numeroId;
         this.Numeros = numero;
@@ -28,6 +38,10 @@
         this.ErrorDescription = errorDesc;
         this.ErrorCode = errorCode;
     };
+
+
+    //ejecuto la funcion de agregar la apuesta detallada
+
 
     this.addApuestaDetalle = function (numeroId, numero, montoApuesta,  borrar, errorCode, errorDesc) {
         try {
@@ -47,6 +61,12 @@
         } catch (exc) { return false; }
     };
 
+
+
+    //funcion que elimina la apuesta detallada
+
+
+
     function removeApuestaDetalle(index) {
         try {
             //facturasVariasModel.Detalles.splice(index, 1);
@@ -64,6 +84,8 @@
         catch (exc) { return false; }
     };
 
+
+    //limpia los detalles de las apuestas de la lista
 
 
     this.clearDetallesList = function () {

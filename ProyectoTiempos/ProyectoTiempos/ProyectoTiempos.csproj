@@ -243,6 +243,10 @@
     <Compile Include="Migrations\201602292126513_CreateDetalleApuestaTable.Designer.cs">
       <DependentUpon>201602292126513_CreateDetalleApuestaTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603012106547_Cambios en Apuesta.cs" />
+    <Compile Include="Migrations\201603012106547_Cambios en Apuesta.Designer.cs">
+      <DependentUpon>201603012106547_Cambios en Apuesta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -407,6 +411,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602292126513_CreateDetalleApuestaTable.resx">
       <DependentUpon>201602292126513_CreateDetalleApuestaTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603012106547_Cambios en Apuesta.resx">
+      <DependentUpon>201603012106547_Cambios en Apuesta.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
