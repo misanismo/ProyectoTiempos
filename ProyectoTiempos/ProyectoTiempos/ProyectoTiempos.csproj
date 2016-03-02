@@ -199,7 +199,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApuestasController.cs" />
     <Compile Include="Controllers\CasasController.cs" />
-    <Compile Include="Controllers\DetalleApuestasController.cs" />
     <Compile Include="Controllers\GenerarApuestasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -246,6 +245,10 @@
     <Compile Include="Migrations\201603012106547_Cambios en Apuesta.cs" />
     <Compile Include="Migrations\201603012106547_Cambios en Apuesta.Designer.cs">
       <DependentUpon>201603012106547_Cambios en Apuesta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603020449518_Update Database.cs" />
+    <Compile Include="Migrations\201603020449518_Update Database.Designer.cs">
+      <DependentUpon>201603020449518_Update Database.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -359,22 +362,17 @@
     <Content Include="Views\Premios\Details.cshtml" />
     <Content Include="Views\Premios\Edit.cshtml" />
     <Content Include="Views\Premios\Index.cshtml" />
-    <Content Include="Views\Sorteos\Create.cshtml" />
-    <Content Include="Views\Sorteos\Delete.cshtml" />
-    <Content Include="Views\Sorteos\Details.cshtml" />
-    <Content Include="Views\Sorteos\Edit.cshtml" />
-    <Content Include="Views\Sorteos\Index.cshtml" />
     <Content Include="Views\GenerarApuestas\Create.cshtml" />
     <Content Include="Views\GenerarApuestas\Delete.cshtml" />
     <Content Include="Views\GenerarApuestas\Details.cshtml" />
     <Content Include="Views\GenerarApuestas\Edit.cshtml" />
     <Content Include="Views\GenerarApuestas\Index.cshtml" />
     <Content Include="Views\GenerarApuestas\_detalleApuestas.cshtml" />
-    <Content Include="Views\DetalleApuestas\Create.cshtml" />
-    <Content Include="Views\DetalleApuestas\Delete.cshtml" />
-    <Content Include="Views\DetalleApuestas\Details.cshtml" />
-    <Content Include="Views\DetalleApuestas\Edit.cshtml" />
-    <Content Include="Views\DetalleApuestas\Index.cshtml" />
+    <Content Include="Views\Sorteos\Create.cshtml" />
+    <Content Include="Views\Sorteos\Delete.cshtml" />
+    <Content Include="Views\Sorteos\Details.cshtml" />
+    <Content Include="Views\Sorteos\Edit.cshtml" />
+    <Content Include="Views\Sorteos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -414,6 +412,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603012106547_Cambios en Apuesta.resx">
       <DependentUpon>201603012106547_Cambios en Apuesta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603020449518_Update Database.resx">
+      <DependentUpon>201603020449518_Update Database.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

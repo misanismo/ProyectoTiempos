@@ -46,7 +46,7 @@ namespace ProyectoTiempos.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdSorteo,Nombre,NumeroSorteo,Hora,Fecha,Estado")] Sorteo sorteo)
+        public ActionResult Create([Bind(Include = "IdSorteo,Nombre,NumeroSorteo,HoraInicio,FechaInicio,HoraFinal,FechaIFinal,Estado")] Sorteo sorteo)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace ProyectoTiempos.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdSorteo,Nombre,NumeroSorteo,Hora,Fecha,Estado")] Sorteo sorteo)
+        public ActionResult Edit([Bind(Include = "IdSorteo,Nombre,NumeroSorteo,HoraInicio,FechaInicio,HoraFinal,FechaIFinal,Estado")] Sorteo sorteo)
         {
             if (ModelState.IsValid)
             {

@@ -15,9 +15,13 @@ namespace ProyectoTiempos.Models
 
         public int NumeroSorteo { get; set; }
 
-        public DateTime Hora { get; set; }
+        public TimeSpan HoraInicio { get; set; }
 
-        public DateTime Fecha { get; set; }
+        public DateTime FechaInicio { get; set; }
+
+        public TimeSpan HoraFinal { get; set; }
+
+        public DateTime FechaIFinal { get; set; }
 
         public bool Estado { get; set; }
 
