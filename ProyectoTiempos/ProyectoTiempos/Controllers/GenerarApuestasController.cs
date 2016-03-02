@@ -20,7 +20,8 @@ namespace ProyectoTiempos.Controllers
         // GET: GenerarApuestas
         public ActionResult Index()
         {
-            var apuestas = db.Apuestas.Include(a => a.Sorteo).Include(a => a.Usuario);
+            var user = (CustomPrincipal)HttpContext.User;
+            var apuestas = db.Apuestas.Where(a=>a.IdUsuario ==user.UsuarioId).Include(a => a.Sorteo).Include(a => a.Usuario);
             return View(apuestas.ToList());
         }
 
@@ -174,8 +175,8 @@ namespace ProyectoTiempos.Controllers
                 {
                     return Json(new { Error = -1, Message = "El monto de su apuesta exede el capital de la casa, por favor baje los montos" });
                 }
-
-                return PartialView("_detalleApuestas", null);
+                IList<DetalleApuestaViewModel> newList = new List<DetalleApuestaViewModel>();
+                return PartialView("_detalleApuestas", newList);
             }
             catch (Exception)
             {

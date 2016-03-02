@@ -12,9 +12,18 @@ namespace ProyectoTiempos.Controllers
     [AuthorizeUser(Roles = TipoUser.Cliente| TipoUser.Admin)]
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult Visualizar()
+        {
+            VisualizarViewModel view = new VisualizarViewModel();
+            view.DetalleApuestas = db.DetalleApuestas.ToList();
+            view.Sorteos = db.Sorteos.ToList();
+            return View(view);
         }
 
         public ActionResult About()

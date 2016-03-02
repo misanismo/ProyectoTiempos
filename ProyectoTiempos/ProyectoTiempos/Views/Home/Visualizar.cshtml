@@ -1,0 +1,52 @@
+﻿@using ProyectoTiempos.Models
+@model ProyectoTiempos.Models.VisualizarViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Numero
+        </th>
+        <th>
+            Monto
+        </th>
+        
+        
+    </tr>
+
+@foreach (var item in Model.Sorteos) {
+    <tr>
+        <td colspan="2" style="background-color: antiquewhite;">
+            @item.Nombre
+        </td>
+    </tr>
+    foreach (var numSorteo in Model.DetalleApuestas.Where(a => a.Apuesta.IdSorteo == item.IdSorteo))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => numSorteo.Numero.Numeros)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => numSorteo.Monto)
+            </td>
+
+        </tr>
+    }
+
+    <tr>
+        <td>
+            Total Acumulado
+        </td>
+        <td>
+            @Model.DetalleApuestas.Where(a => a.Apuesta.IdSorteo == item.IdSorteo).Sum(a => a.Monto)
+        </td>
+
+    </tr>
+}
+
+</table>

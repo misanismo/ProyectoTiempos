@@ -265,6 +265,7 @@
     <Compile Include="Models\Premio.cs" />
     <Compile Include="Models\Sorteo.cs" />
     <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\VisualizarViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Views\BaseViewPage.cs" />
@@ -373,6 +374,7 @@
     <Content Include="Views\Apuestas\Details.cshtml" />
     <Content Include="Views\Apuestas\Edit.cshtml" />
     <Content Include="Views\Apuestas\Index.cshtml" />
+    <Content Include="Views\Home\Visualizar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

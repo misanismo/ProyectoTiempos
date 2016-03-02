@@ -121,6 +121,11 @@ function ViewCommonProcess() {
         $('#' + control).html(errMsg);
     }
 
+    function writeSuccess(control, msg, type) {
+        var errMsg = '<div class="alert alert-success" role="alert"><a class="close" data-dismiss="alert" href="#">×</a><h4 class="alert-heading">' + msg + '</h4></div>';
+        $('#' + control).html(errMsg);
+    }
+
   
     function renderDetallesApuestas() {
         clearErrors();
@@ -219,7 +224,10 @@ function ViewCommonProcess() {
                 if (data.Error == "-1") {
                     writeError('alertsDetalles', data.Message, 'danger');
                  } else {
-                    writeError('alertsDetalles', 'Error al guardar la apuesta.', 'error');
+                    writeSuccess('alertsDetalles', 'La Apuesta se ha guardado correctamente.', 'error');
+                    $("#anyListDetailsEntity").html(data);
+                    initializeApuestas();
+                    clearDetallesFields();
                 }
             },
             error: function () { writeError('alertsDetalles', 'Error .', 'error'); }
